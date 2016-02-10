@@ -8,13 +8,18 @@ task :default => :spec
 
 desc "Runs the string processing script"
 task :run, [:in_words, :out_words, :out_sequences] do |t, args|
+  in_words_path = args[:in_words] || "dictionary.txt"
+  out_words_path = args[:out_words] || "words.txt"
+  out_sequences_path = args[:out_sequences] || "sequences.txt"
+
+  Parser.new.parse(input_path: in_words_path, words_path: out_words_path, sequences_path: out_sequences_path)
+end
+
+desc "Benchmarks the run task"
+task :benchmark do
   Benchmark.bm do |bm|
     bm.report do
-      in_words_path = args[:in_words] || "dictionary.txt"
-      out_words_path = args[:out_words] || "words.txt"
-      out_sequences_path = args[:out_sequences] || "sequences.txt"
-
-      Parser.new.parse(input_path: in_words_path, words_path: out_words_path, sequences_path: out_sequences_path)
+      Rake::Task['run'].invoke
     end
   end
 end
@@ -25,7 +30,7 @@ task :confirm, [:words_path, :sequences_path] do |t, args|
   sequences_path = args["sequences_path"] || "sequences.txt"
 
   bad = []
-  words = File.read(words_path).gsub(/[^A-Za-z\n]/, "").split("\n").uniq.join("\n")
+  words = File.read(words_path).gsub(/[^A-Za-z\n]/, "").split("\n").uniq.join("\n") # sorry Demeter
   File.open(sequences_path, "r").each do |line|
     splits = words.split(line.strip)
     if splits.count > 2 && splits[1].include?("\n")

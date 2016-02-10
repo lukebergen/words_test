@@ -30,7 +30,7 @@ for each sequence in sequences
   // process as usual
 ```
 
-I _believe_ this would bring a performance improvement, but not so much so with a dictionary of this size. Furthermore, the `commonness_threshold` would need to be tinkered with depending on the size and type of dictionary.
+I _believe_ this would bring a performance improvement, but not one of much significance given the size of this dictionary. Furthermore, the `commonness_threshold` would need to be tinkered with depending on the size and type of dictionary.
 
 #### Edge cases and considerations
 I discovered an edge case that does not exist in the provided dictionary. I wrote a test for it (`doesn't discount duplicate sequences if they occur within the same word`). In the provided dictionary, two possible instances of this exist "couscous" and "beriberi". However, both "beri" and "cous" exist in other words so they are correctly discounted anyway. With a larger dictionary though, this could potentially creep up.

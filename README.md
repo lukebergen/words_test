@@ -4,9 +4,9 @@
 This is my solution to the problem described at [https://gist.github.com/pedromartinez/7788650](https://gist.github.com/pedromartinez/7788650).
 
 ## Usage
-- `rake run[in_words,out_words,out_sequences]` Runs the string processing script.
+- `rake run[in_words,out_words,out_sequences]` Runs the string processing script. (args default to "dictionary.txt", "words.txt", and "sequences.txt" respectively).
 - `rake spec` Run RSpec code examples.
-- `rake confirm[words_path,sequences_path]` Utility task to confirm that the output files meets all the requirements.
+- `rake confirm[words_path,sequences_path]` Utility task to confirm that the output files meets all the requirements. (args default to "words.txt", and "sequences.txt" respectively).
 
 ## Considerations
 
